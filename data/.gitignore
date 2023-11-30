@@ -1,0 +1,13 @@
+iwslt14/*
+!iwslt14/de-en/
+iwslt14/de-en/*
+!iwslt14/de-en/prepare.bash
+
+wmt14/*
+!wmt14/en-de/
+wmt14/en-de/*
+!wmt14/en-de/prepare.bash
+
+!wmt14/en-fr/
+wmt14/en-fr/*
+!wmt14/en-fr/prepare.bash

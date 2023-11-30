@@ -1,0 +1,64 @@
+train_src:  "YOUR_WMT14/en-de/processed/train.en"
+train_tgt:  "YOUR_WMT14/en-de/processed/train.de"
+
+dev_src:    "YOUR_WMT14/en-de/processed/dev.en"
+dev_tgt:    "YOUR_WMT14/en-de/processed/dev.de"
+dev_ref:    "YOUR_WMT14/en-de/detokenized/dev.de"
+
+test_src:   "YOUR_WMT14/en-de/processed/test.en"
+test_tgt:   "YOUR_WMT14/en-de/processed/test.de"
+test_ref:   "YOUR_WMT14/en-de/detokenized/test.de"
+
+vocab_src:  "YOUR_WMT14/en-de/vocabs/source.vocab.pkl"
+vocab_tgt:  "YOUR_WMT14/en-de/vocabs/target.vocab.pkl"
+number_of_gpus:   4
+seed:             80420
+deterministic:    True
+
+dataset:                "TranslationDataset"
+load_datset_in_memory:  True
+search_test_set:        True
+threaded_data_loading:  False
+batch_size:             1700  # [target tokens without padding] [1024,2048]
+batch_size_search:      512   # [target tokens without padding]
+max_sentence_length:    128
+
+checkpoints:                  True
+checkpoint_unit:              'Step' # ['Step', 'Epoch']
+checkpoint_strategy:          'All' # ['All', 'Best']
+checkpoint_period:            600
+checkpoint_start_after:       100000
+
+units_to_train: 300000
+
+average_last_after_best_checkpoints:  True
+average_last_checkpoints:             True
+checkpoints_to_average:               20
+
+model:      'Transformer'
+encL:       6
+decL:       6
+model_dim:  1024
+ff_dim:     4096
+dropout:    0.3
+nHeads:     16
+tiew:       True
+
+gating:                   False
+use_sinusodial_pos_embed: True
+
+initializer:              'GlorotUniform'
+variance_scaling_scale:   0.78
+
+score:            'LabelSmoothingCrossEntropy'
+label_smoothing:  0.1
+
+optimizer:    'WarmupAdam'
+warmup:       4000
+lr_scale:     1.0
+update_freq:  16
+
+search_algorithm:   'Beam'
+beam_size:          12
+length_norm:        True
+stepwise:           True
